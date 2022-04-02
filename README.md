@@ -8,7 +8,7 @@
 
 ## Overview
 ### Description
-Show off your computer builds of all sorts to the world. Include component lists and any notes about special customizations
+Show off your computer builds of all sorts to the world. Include component lists and any notes about special customizations.
 Backed by Parse.
 
 ## Product Spec
