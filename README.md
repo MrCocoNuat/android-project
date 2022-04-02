@@ -66,9 +66,9 @@ Backed by Parse.
    * only navigation button goes anywhere
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
-
+![](project_github_assets/wireframes/feed.png)
+![](project_github_assets/wireframes/create.png)
+![](project_github_assets/wireframes/profile.png)
 
 ## Schema 
 [This section will be completed in Unit 9]
