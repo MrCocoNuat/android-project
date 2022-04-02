@@ -1,9 +1,9 @@
 # PC Presenter
 
 ## Contributors 
- - Me
+ - Me (Aaron Wang)
  
- That's it?
+ That's it? Pod 11 people, if you want in then message me on slack or something...
 
 ## Table of Contents
 1. [Overview](#Overview)
