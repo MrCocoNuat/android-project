@@ -81,6 +81,6 @@ Backed by Parse.
 Rig - Includes required fields (cpu, photo, etc.) and variable optional key-value fields (special notes, specific benchmark scores, etc.)
 
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+- Backed by Parse:
+   - Uses a Parse Rig class to store relevant information
+   - Uses the Parse User class to store users' authentication 
