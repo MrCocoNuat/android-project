@@ -33,9 +33,9 @@ class CreateFragment : Fragment() {
             onLaunchCamera()
         }
         view.findViewById<Button>(R.id.buttonSubmit).setOnClickListener{
-            val caption = view.findViewById<EditText>(R.id.etCaption).text.toString()
+            val name = view.findViewById<EditText>(R.id.etCaption).text.toString()
             if (photoFile != null) {
-                submitPost(caption, photoFile)
+                submitPost(name, photoFile)
             }
             else{
                 Toast.makeText(context, "Must include an image!", Toast.LENGTH_SHORT).show()
@@ -44,9 +44,9 @@ class CreateFragment : Fragment() {
         return view
     }
 
-    fun submitPost(caption : String, image : File?){
+    fun submitPost(name : String, image : File?){
         val post = Rig()
-        post.setDescription(caption)
+        post.setName(name)
         if (image == null) {
             Toast.makeText(context, "Photo needed!", Toast.LENGTH_SHORT).show()
             return
@@ -56,8 +56,8 @@ class CreateFragment : Fragment() {
 
         post.saveInBackground(){ e ->
             if (e == null) {
-                Log.i(MainActivity.TAG, "Successfully saved post")
-                Toast.makeText(context, "Post submitted!", Toast.LENGTH_SHORT).show()
+                Log.i(MainActivity.TAG, "Successfully saved rig")
+                Toast.makeText(context, "Rig submitted!", Toast.LENGTH_SHORT).show()
                 requireView().findViewById<EditText>(R.id.etCaption).text.clear()
                 requireView().findViewById<ImageView>(R.id.ivImage).setImageDrawable(null)
             }
@@ -65,7 +65,7 @@ class CreateFragment : Fragment() {
         }
     }
 
-    private val APP_TAG = "Insta"
+    private val APP_TAG = "PC Presenter"
     private val CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034
     private val photoFileName = "photo.jpg"
     var photoFile: File? = null

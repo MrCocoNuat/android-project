@@ -31,7 +31,7 @@
         android:layout_margin="8dp"
         android:ems="10"
         android:gravity="start|bottom"
-        android:hint="caption"
+        android:hint="Name"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toStartOf="@+id/buttonSubmit"
         app:layout_constraintStart_toStartOf="parent"
