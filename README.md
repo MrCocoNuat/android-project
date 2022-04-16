@@ -25,7 +25,7 @@ Backed by Parse.
 - [x] User can create a listing detailing parts used in their personal computer ("Rig") and upload it 
    - [x] User can give a name to each Rig
    - [ ] User can attach benchmark scores to each Rig to indicate expected performance
-   - [x] User can add a photo and explanatory notes
+   - [x] User can add a photo (new or from a file) and explanatory notes
    - [ ] User can update this listing later if it changes or delete it
 - [ ] User can browse the server's list of Rigs by their photos
 
