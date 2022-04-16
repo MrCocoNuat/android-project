@@ -21,11 +21,11 @@ Backed by Parse.
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
-- [ ] User can sign up and log in to / log out from the service
-- [ ] User can create a listing detailing parts used in their personal computer ("Rig") and upload it 
-   - [ ] User can give a name to each Rig
+- [x] User can sign up and log in to / log out from the service
+- [x] User can create a listing detailing parts used in their personal computer ("Rig") and upload it 
+   - [x] User can give a name to each Rig
    - [ ] User can attach benchmark scores to each Rig to indicate expected performance
-   - [ ] User can add a photo and explanatory notes
+   - [x] User can add a photo and explanatory notes
    - [ ] User can update this listing later if it changes or delete it
 - [ ] User can browse the server's list of Rigs by their photos
 
@@ -69,6 +69,10 @@ Backed by Parse.
 * Profile
    * successful login/logout switches state of this screen
    * only navigation button goes anywhere
+
+## Walkthroughs / Progress
+Build 1
+![](project_github_assets/walkthroughs/week1.png)
 
 ## Wireframes
 ![](project_github_assets/wireframes/feed.png)
