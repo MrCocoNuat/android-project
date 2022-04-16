@@ -72,7 +72,7 @@ Backed by Parse.
 
 ## Walkthroughs / Progress
 Build 1
-![](project_github_assets/walkthroughs/week1.png)
+![](project_github_assets/walkthroughs/week1.gif)
 
 ## Wireframes
 ![](project_github_assets/wireframes/feed.png)
