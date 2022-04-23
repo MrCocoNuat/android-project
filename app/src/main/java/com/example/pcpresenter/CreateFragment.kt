@@ -83,11 +83,11 @@ class CreateFragment : Fragment() {
             if (e == null) {
                 Log.i(MainActivity.TAG, "Successfully saved rig")
                 Toast.makeText(context, "Rig submitted!", Toast.LENGTH_SHORT).show()
-                requireView().findViewById<EditText>(R.id.tvName).text.clear()
-                requireView().findViewById<EditText>(R.id.tvDescription).text.clear()
-                requireView().findViewById<EditText>(R.id.tvCpu).text.clear()
-                requireView().findViewById<EditText>(R.id.tvGpu).text.clear()
-                requireView().findViewById<EditText>(R.id.tvMem).text.clear()
+                requireView().findViewById<EditText>(R.id.etName).text.clear()
+                requireView().findViewById<EditText>(R.id.etDescription).text.clear()
+                requireView().findViewById<EditText>(R.id.etCpu).text.clear()
+                requireView().findViewById<EditText>(R.id.etGpu).text.clear()
+                requireView().findViewById<EditText>(R.id.etMem).text.clear()
                 requireView().findViewById<ImageView>(R.id.ivImage).setImageResource(R.drawable.ic_baseline_add_a_photo_24)
             }
             else Log.e(MainActivity.TAG, "Could not save post: ${e}")

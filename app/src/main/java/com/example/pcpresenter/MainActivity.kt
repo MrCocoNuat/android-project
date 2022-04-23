@@ -14,6 +14,8 @@ import java.io.File
 import java.io.IOException
 import java.nio.charset.Charset
 
+//TODO(Splash)
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var actionBar : ActionBar
@@ -21,8 +23,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var currentFragment : Fragment
     private lateinit var feedFragment: Fragment
     private lateinit var createFragment: Fragment
-
-    private lateinit var openDetailFragmentNotifier: RigFeedFragment.OpenDetailFragmentNotifier
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,15 +35,20 @@ class MainActivity : AppCompatActivity() {
                 openDetail(rig)
             }
         }
+        openFeedFragmentNotifier = object : RigFeedFragment.OpenFeedFragmentNotifier{
+            override fun openFeedFragment(user: ParseUser) {
+                openFeed(user)
+            }
+        }
 
-        feedFragment = RigFeedFragment(null, openDetailFragmentNotifier)
+        feedFragment = RigFeedFragment(null, openDetailFragmentNotifier, openFeedFragmentNotifier)
         createFragment = CreateFragment()
         currentFragment = feedFragment
 
         findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnItemSelectedListener { item ->
             Log.i(TAG,"Bottom clicked")
             when (item.itemId) {
-                R.id.action_feed -> { openFeed(); true }
+                R.id.action_feed -> { openFeed(null); true }
                 R.id.action_create -> { openCapture(); true }
                 R.id.action_profile -> { openProfile();true }
                 else -> true
@@ -55,11 +60,11 @@ class MainActivity : AppCompatActivity() {
         //login now
         if (credentials == null) {
             Log.i(TAG, "No cached user")
-            openFeed()
+            openFeed(null)
         } else ParseUser.logInInBackground(credentials[0], credentials[1]) { user, _ ->
             if (user != null) Log.i(TAG, "Auto-login as ${user.username} success!")
             else Log.e(TAG, "Auto-login failed!")
-            openFeed()
+            openFeed(null)
         }
 
         supportFragmentManager.beginTransaction()
@@ -70,13 +75,18 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun openFeed(){
-        Log.i(TAG,"Opening Feed fragment")
+    fun openFeed(user : ParseUser?){
+        Log.i(TAG,"Opening Feed fragment of user $user")
         actionBar.title = "Feed"
-        supportFragmentManager.beginTransaction()
+        var fragmentToShow = feedFragment
+        val fragmentManager = supportFragmentManager.beginTransaction()
             .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-            //.hide(currentFragment)
-            .replace(R.id.placeholder,feedFragment)
+        if (user != null){
+            actionBar.title = "Rigs from ${user.username}" //TODO on back button press reset title too
+            fragmentToShow = RigFeedFragment(user,openDetailFragmentNotifier, openFeedFragmentNotifier)
+            fragmentManager.addToBackStack(null)
+        }
+            fragmentManager.replace(R.id.placeholder,fragmentToShow)
             .commit()
         currentFragment = feedFragment
     }
@@ -117,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
-            actionBar.title = "${ParseUser.getCurrentUser().username}'s Profile"
+            actionBar.title = "Your Profile"
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                 .replace(R.id.placeholder,profileFragment)
@@ -183,5 +193,8 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val TAG = "MainActivity"
         const val LOGIN_SUCCESS = "login success"
+
+        lateinit var openDetailFragmentNotifier: RigFeedFragment.OpenDetailFragmentNotifier
+        lateinit var openFeedFragmentNotifier: RigFeedFragment.OpenFeedFragmentNotifier
     }
 }

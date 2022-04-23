@@ -68,6 +68,7 @@ class LoginFragment(private val onLoginSuccessListener : OnLoginSuccessListener)
                 else{
                     // no good
                     etErrorText.text = "Sign up failed. Duplicate usernames?"
+                    Log.e(MainActivity.TAG,e.message.toString())
                 }
             }
         }

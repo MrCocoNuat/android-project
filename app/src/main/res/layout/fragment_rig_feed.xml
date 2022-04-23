@@ -11,7 +11,7 @@
         android:layout_height="160dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:alpha="0.25"
+        android:alpha="0.5"
         tools:srcCompat="@tools:sample/avatars" />
 
 
@@ -19,11 +19,13 @@
         android:id="@+id/tvRigUploader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/tvRigName"
         android:layout_alignStart="@+id/ivRigImage"
-        android:layout_margin="8dp"
-        android:textSize="16sp"
+        android:layout_alignEnd="@+id/ivRigImage"
         android:text="username"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvRigTimestamp"
@@ -32,7 +34,7 @@
         android:layout_toEndOf="@id/tvRigUploader"
         android:layout_alignEnd="@+id/ivRigImage"
         android:textSize="16sp"
-        android:text="5h"
+        android:text=""
         android:layout_margin="8dp"
         android:textAlignment="textEnd"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -44,8 +46,11 @@
         android:layout_alignStart="@+id/ivRigImage"
         android:layout_alignEnd="@+id/ivRigImage"
         android:layout_alignBottom="@+id/ivRigImage"
+        android:layout_marginStart="8dp"
+
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="rigname"
-        android:layout_margin="8dp"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="32sp"

@@ -18,4 +18,8 @@
         <item name="colorPrimary">@color/red</item>
     </style>
 
+    <style name="Theme.PCPresenter.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+    </style>
+
 </resources>

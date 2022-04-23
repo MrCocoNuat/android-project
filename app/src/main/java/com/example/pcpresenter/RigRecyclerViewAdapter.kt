@@ -19,9 +19,12 @@ import java.security.MessageDigest
 
 
 class RigRecyclerViewAdapter(val rigs: List<Rig>,
-    val onItemClickListener: OnItemClickListener, ) : RecyclerView.Adapter<RigRecyclerViewAdapter.ViewHolder>() {
+    val onItemClickListener: OnItemClickListener,
+    val onUserClickListener: OnUserClickListener
+) : RecyclerView.Adapter<RigRecyclerViewAdapter.ViewHolder>() {
 
     interface OnItemClickListener{ fun onItemClick(position: Int) }
+    interface OnUserClickListener{ fun onUserClick(position: Int) }
 
     private val multiTransformation = MultiTransformation(CenterCrop(), RoundedCorners(30))
 
@@ -36,6 +39,7 @@ class RigRecyclerViewAdapter(val rigs: List<Rig>,
         holder.nameView.text = rig.getName()
         holder.nameView.setOnClickListener{onItemClickListener.onItemClick(position)}
         holder.uploaderView.text = rig.getUploader().username
+        holder.uploaderView.setOnClickListener{onUserClickListener.onUserClick(position)}
         Glide.with(holder.photoView)
             .load(rig.getPhoto().file)
             .transform(multiTransformation)

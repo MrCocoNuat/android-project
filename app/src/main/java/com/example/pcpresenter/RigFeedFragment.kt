@@ -15,9 +15,11 @@ import com.parse.ParseUser
 
 
 class RigFeedFragment(private val user : ParseUser?,
-                      val openDetailFragmentNotifier: OpenDetailFragmentNotifier
+                      val openDetailFragmentNotifier: OpenDetailFragmentNotifier,
+                      val openFeedFragmentNotifier: OpenFeedFragmentNotifier
 ) : Fragment() {
 
+    interface OpenFeedFragmentNotifier{ fun openFeedFragment(user : ParseUser) }
     interface OpenDetailFragmentNotifier{ fun openDetailFragment(rig:Rig) }
 
     val rigs : MutableList<Rig> = mutableListOf()
@@ -64,10 +66,17 @@ class RigFeedFragment(private val user : ParseUser?,
         val rvPosts = view.findViewById<RecyclerView>(R.id.list)
         // Set the adapter
         rvPosts.layoutManager = LinearLayoutManager(context)
-        adapter = RigRecyclerViewAdapter(rigs, object : RigRecyclerViewAdapter.OnItemClickListener{
+        adapter = RigRecyclerViewAdapter(rigs,
+            object : RigRecyclerViewAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 openDetailFragmentNotifier.openDetailFragment(rigs[position])
             }
+        },
+        object : RigRecyclerViewAdapter.OnUserClickListener{
+            override fun onUserClick(position: Int) {
+                openFeedFragmentNotifier.openFeedFragment(rigs[position].getUploader())
+            }
+
         })
         rvPosts.adapter = adapter
 
