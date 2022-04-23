@@ -72,7 +72,8 @@ Backed by Parse.
 
 ## Walkthroughs / Progress
 Build 2
-![](oroject_github_assets/walkthroughs/week2.gif)
+![](project_github_assets/walkthroughs/week2.gif)
+
 Build 1
 ![](project_github_assets/walkthroughs/week1.gif)
 
