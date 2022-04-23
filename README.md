@@ -3,7 +3,7 @@
 ## Contributors 
  - Me (Aaron Wang)
  
- That's it? Pod 11 people, if you want in then message me on slack or something...
+ That's it? Pod 11 people, you must all be dead or something
 
 ## Table of Contents
 1. [Overview](#Overview)
@@ -24,16 +24,16 @@ Backed by Parse.
 - [x] User can sign up and log in to / log out from the service
 - [x] User can create a listing detailing parts used in their personal computer ("Rig") and upload it 
    - [x] User can give a name to each Rig
-   - [ ] User can attach benchmark scores to each Rig to indicate expected performance
    - [x] User can add a photo (new or from a file) and explanatory notes
-   - [ ] User can update this listing later if it changes or delete it
-- [ ] User can browse the server's list of Rigs by their photos
+- [x] User can browse the server's list of Rigs by their photos
 
 **Optional Nice-to-have Stories**
 
 - [ ] User can access a webpage to buy specific parts they see (from Amazon, etc.)
 - [ ] User can see all of a specific user's Rigs, including their own
-
+- [ ] User can attach benchmark scores to each Rig to indicate expected performance
+- [ ] User can update this listing later if it changes or delete it
+  
 ### 2. Screen Archetypes
 
 * The Feed
