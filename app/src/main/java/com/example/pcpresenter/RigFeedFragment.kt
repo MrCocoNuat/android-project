@@ -14,7 +14,11 @@ import com.parse.ParseQuery
 import com.parse.ParseUser
 
 
-class RigFeedFragment(private val user : ParseUser?) : Fragment() {
+class RigFeedFragment(private val user : ParseUser?,
+                      val openDetailFragmentNotifier: OpenDetailFragmentNotifier
+) : Fragment() {
+
+    interface OpenDetailFragmentNotifier{ fun openDetailFragment(rig:Rig) }
 
     val rigs : MutableList<Rig> = mutableListOf()
     private lateinit var swipeContainer : SwipeRefreshLayout
@@ -46,6 +50,7 @@ class RigFeedFragment(private val user : ParseUser?) : Fragment() {
         }
         swipeContainer.isRefreshing = false
         Log.i("aaaaa",adapter.itemCount.toString())
+
     }
 
     override fun onCreateView(
@@ -59,7 +64,11 @@ class RigFeedFragment(private val user : ParseUser?) : Fragment() {
         val rvPosts = view.findViewById<RecyclerView>(R.id.list)
         // Set the adapter
         rvPosts.layoutManager = LinearLayoutManager(context)
-        adapter = RigRecyclerViewAdapter(rigs)
+        adapter = RigRecyclerViewAdapter(rigs, object : RigRecyclerViewAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                openDetailFragmentNotifier.openDetailFragment(rigs[position])
+            }
+        })
         rvPosts.adapter = adapter
 
         // Lookup the swipe container view

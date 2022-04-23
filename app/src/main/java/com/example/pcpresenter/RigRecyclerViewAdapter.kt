@@ -18,7 +18,10 @@ import com.example.pcpresenter.databinding.FragmentRigFeedBinding
 import java.security.MessageDigest
 
 
-class RigRecyclerViewAdapter(val rigs: List<Rig>) : RecyclerView.Adapter<RigRecyclerViewAdapter.ViewHolder>() {
+class RigRecyclerViewAdapter(val rigs: List<Rig>,
+    val onItemClickListener: OnItemClickListener, ) : RecyclerView.Adapter<RigRecyclerViewAdapter.ViewHolder>() {
+
+    interface OnItemClickListener{ fun onItemClick(position: Int) }
 
     private val multiTransformation = MultiTransformation(CenterCrop(), RoundedCorners(30))
 
@@ -31,6 +34,7 @@ class RigRecyclerViewAdapter(val rigs: List<Rig>) : RecyclerView.Adapter<RigRecy
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val rig = rigs[position]
         holder.nameView.text = rig.getName()
+        holder.nameView.setOnClickListener{onItemClickListener.onItemClick(position)}
         holder.uploaderView.text = rig.getUploader().username
         Glide.with(holder.photoView)
             .load(rig.getPhoto().file)

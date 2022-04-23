@@ -21,6 +21,8 @@ import com.parse.ParseFile
 import com.parse.ParseUser
 import java.io.File
 
+//TODO(move window when keyboard is up)
+
 class CreateFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,37 +31,64 @@ class CreateFragment : Fragment() {
         // Inflate the layout fo this fragment
         val view = inflater.inflate(R.layout.fragment_create, container, false)
 
-        view.findViewById<Button>(R.id.buttonPicture).setOnClickListener{
+        val imageView = view.findViewById<ImageView>(R.id.ivImage)
+        imageView.setImageResource(R.drawable.ic_baseline_add_a_photo_24)
+        imageView.findViewById<ImageView>(R.id.ivImage).setOnClickListener{
             onLaunchCamera()
         }
+
         view.findViewById<Button>(R.id.buttonSubmit).setOnClickListener{
-            val name = view.findViewById<EditText>(R.id.etCaption).text.toString()
-            if (photoFile != null) {
-                submitPost(name, photoFile)
-            }
-            else{
+            val name = view.findViewById<EditText>(R.id.etName).text.toString()
+            val description = view.findViewById<EditText>(R.id.etDescription).text.toString()
+            val cpu = view.findViewById<EditText>(R.id.etCpu).text.toString()
+            val gpu = view.findViewById<EditText>(R.id.etGpu).text.toString()
+            val mem = view.findViewById<EditText>(R.id.etMem).text.toString().toDoubleOrNull()
+            //check inputs
+            if (photoFile == null) {
                 Toast.makeText(context, "Must include an image!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+            if (name.isEmpty()){
+                Toast.makeText(context, "Must include a name!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (cpu.isEmpty()){
+                Toast.makeText(context, "Must include your CPU!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (gpu.isEmpty()){
+                Toast.makeText(context, "Must include your GPU!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (mem == null){
+                Toast.makeText(context, "Must include valid memory capacity!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            submitPost(name, description, photoFile!!, cpu, gpu, mem)
         }
         return view
     }
 
-    fun submitPost(name : String, image : File?){
-        val post = Rig()
-        post.setName(name)
-        if (image == null) {
-            Toast.makeText(context, "Photo needed!", Toast.LENGTH_SHORT).show()
-            return
-        }
-        post.setPhoto(ParseFile(photoFile))
-        post.setUploader(ParseUser.getCurrentUser())
+    fun submitPost(name : String, description :String, image : File, cpu : String, gpu : String, mem : Double){
+        val newRig = Rig()
+        newRig.setName(name)
+        newRig.setDescription(description)
+        newRig.setPhoto(ParseFile(image))
+        newRig.setUploader(ParseUser.getCurrentUser())
+        newRig.setCpu(cpu)
+        newRig.setGpu(gpu)
+        newRig.setMem(mem)
 
-        post.saveInBackground(){ e ->
+        newRig.saveInBackground(){ e ->
             if (e == null) {
                 Log.i(MainActivity.TAG, "Successfully saved rig")
                 Toast.makeText(context, "Rig submitted!", Toast.LENGTH_SHORT).show()
-                requireView().findViewById<EditText>(R.id.etCaption).text.clear()
-                requireView().findViewById<ImageView>(R.id.ivImage).setImageDrawable(null)
+                requireView().findViewById<EditText>(R.id.tvName).text.clear()
+                requireView().findViewById<EditText>(R.id.tvDescription).text.clear()
+                requireView().findViewById<EditText>(R.id.tvCpu).text.clear()
+                requireView().findViewById<EditText>(R.id.tvGpu).text.clear()
+                requireView().findViewById<EditText>(R.id.tvMem).text.clear()
+                requireView().findViewById<ImageView>(R.id.ivImage).setImageResource(R.drawable.ic_baseline_add_a_photo_24)
             }
             else Log.e(MainActivity.TAG, "Could not save post: ${e}")
         }

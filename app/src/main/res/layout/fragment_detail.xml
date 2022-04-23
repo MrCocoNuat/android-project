@@ -7,94 +7,94 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/ivImage"
+        android:id="@+id/ivImageDetail"
         android:layout_width="0dp"
-        android:layout_height="240dp"
+        android:layout_height="0dp"
         android:layout_marginHorizontal="32dp"
         android:layout_marginVertical="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/ic_baseline_add_a_photo_24" />
 
-    <Button
-        android:id="@+id/buttonSubmit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/button_submit_post"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etMem" />
 
-    <EditText
-        android:id="@+id/etName"
+    <TextView
+        android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:gravity="start|bottom"
-        android:hint="Name"
-        android:inputType="textPersonName"
+        android:text="namename"
+        android:layout_margin="16dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/tvDescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivImage" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/etDescription"
+    <TextView
+        android:id="@+id/tvDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Description"
-        android:inputType="textMultiLine"
         android:maxLines="5"
+        android:text="Descriptiondescription"
+        android:layout_margin="16dp"
+        android:textSize="16sp"
         android:textAlignment="gravity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/tvCpu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etName" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/etCpu"
+    <TextView
+        android:id="@+id/tvCpu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="CPU"
+        android:text="CPUCPU"
+        android:layout_margin="8dp"
+        android:textSize="20sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/tvGpu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivCpu"
-        app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+        app:layout_constraintStart_toEndOf="@id/ivCpu" />
 
-    <EditText
-        android:id="@+id/etGpu"
+    <TextView
+        android:id="@+id/tvGpu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="GPU"
+        android:text="GPUGPU"
+        android:layout_margin="8dp"
+        android:textSize="20sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/tvMem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivCpu2"
-        app:layout_constraintTop_toBottomOf="@+id/etCpu" />
+        app:layout_constraintStart_toEndOf="@id/ivCpu2" />
 
-    <EditText
-        android:id="@+id/etMem"
+    <TextView
+        android:id="@+id/tvMem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Memory"
-        android:inputType="number"
+        android:text="MEMMEM"
+        android:layout_margin="8dp"
+        android:textSize="20sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/ivCpu3"
-        app:layout_constraintTop_toBottomOf="@+id/etGpu" />
+        app:layout_constraintStart_toEndOf="@+id/ivCpu3" />
 
     <ImageView
         android:id="@+id/ivCpu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/etCpu"
-        app:layout_constraintEnd_toStartOf="@+id/etCpu"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCpu"
+        app:layout_constraintEnd_toStartOf="@+id/tvCpu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDescription"
+        app:layout_constraintTop_toTopOf="@+id/tvCpu"
         app:srcCompat="@drawable/ic_cpu_24" />
 
     <ImageView
@@ -102,10 +102,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/etGpu"
-        app:layout_constraintEnd_toStartOf="@+id/etGpu"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGpu"
+        app:layout_constraintEnd_toStartOf="@+id/tvGpu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etGpu"
+        app:layout_constraintTop_toTopOf="@+id/tvGpu"
         app:srcCompat="@drawable/ic_cpu_24" />
 
     <ImageView
@@ -113,10 +113,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/etMem"
-        app:layout_constraintEnd_toStartOf="@+id/etMem"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMem"
+        app:layout_constraintEnd_toStartOf="@+id/tvMem"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etMem"
+        app:layout_constraintTop_toTopOf="@+id/tvMem"
         app:srcCompat="@drawable/ic_cpu_24" />
 
     <TextView
@@ -126,8 +126,8 @@
         android:text="GB"
         android:layout_margin="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toBottomOf="@+id/etMem"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etMem" />
+        app:layout_constraintTop_toTopOf="@+id/tvMem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

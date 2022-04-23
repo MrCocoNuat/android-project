@@ -18,12 +18,27 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var actionBar : ActionBar
 
+    private lateinit var currentFragment : Fragment
+    private lateinit var feedFragment: Fragment
+    private lateinit var createFragment: Fragment
+
+    private lateinit var openDetailFragmentNotifier: RigFeedFragment.OpenDetailFragmentNotifier
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         actionBar = supportActionBar!!
+
+        openDetailFragmentNotifier = object : RigFeedFragment.OpenDetailFragmentNotifier{
+            override fun openDetailFragment(rig: Rig) {
+                openDetail(rig)
+            }
+        }
+
+        feedFragment = RigFeedFragment(null, openDetailFragmentNotifier)
+        createFragment = CreateFragment()
+        currentFragment = feedFragment
 
         findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnItemSelectedListener { item ->
             Log.i(TAG,"Bottom clicked")
@@ -46,6 +61,12 @@ class MainActivity : AppCompatActivity() {
             else Log.e(TAG, "Auto-login failed!")
             openFeed()
         }
+
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+            .replace(R.id.placeholder,feedFragment)
+            .commit()
+
     }
 
 
@@ -54,8 +75,22 @@ class MainActivity : AppCompatActivity() {
         actionBar.title = "Feed"
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-            .replace(R.id.placeholder,RigFeedFragment(null))
+            //.hide(currentFragment)
+            .replace(R.id.placeholder,feedFragment)
             .commit()
+        currentFragment = feedFragment
+    }
+
+    fun openDetail(rig : Rig){
+        Log.i(TAG,"Opening Detail fragment")
+        val detailFragment = DetailFragment(rig)
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+            //.hide(currentFragment)
+            .replace(R.id.placeholder,detailFragment)
+            .addToBackStack(null)
+            .commit()
+        currentFragment = detailFragment
     }
 
     fun openCapture(){
@@ -64,40 +99,46 @@ class MainActivity : AppCompatActivity() {
             actionBar.title = "Upload your Creation"
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                .replace(R.id.placeholder,CreateFragment())
+                //.hide(currentFragment)
+                .replace(R.id.placeholder,createFragment)
                 .commit()
         }
+        currentFragment = createFragment
     }
 
     fun openProfile(){
         if (ParseUser.getCurrentUser() == null) openLogin()
         else{
+            val profileFragment = ProfileFragment(object : ProfileFragment.OnLogoutListener{
+                override fun onLogout() {
+                    ParseUser.logOutInBackground(){
+                        deleteUserFile()
+                        openLogin()
+                    }
+                }
+            })
             actionBar.title = "${ParseUser.getCurrentUser().username}'s Profile"
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                .replace(R.id.placeholder,ProfileFragment(object : ProfileFragment.OnLogoutListener{
-                    override fun onLogout() {
-                        ParseUser.logOutInBackground(){
-                            deleteUserFile()
-                            openLogin()
-                        }
-                    }
-                }))
+                .replace(R.id.placeholder,profileFragment)
                 .commit()
+            currentFragment = profileFragment
         }
     }
 
     fun openLogin(){
         actionBar.title = "Sign In"
+        val loginFragment = LoginFragment(object : LoginFragment.OnLoginSuccessListener{
+            override fun onLoginSuccess(username : String, password : String, remember : Boolean) {
+                if (remember) saveCredentials(username, password)
+                openProfile()
+            }
+        })
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-            .replace(R.id.placeholder,LoginFragment(object : LoginFragment.OnLoginSuccessListener{
-                override fun onLoginSuccess(username : String, password : String, remember : Boolean) {
-                    if (remember) saveCredentials(username, password)
-                    openProfile()
-                }
-            }))
+            .replace(R.id.placeholder,loginFragment)
             .commit()
+        currentFragment = loginFragment
     }
 
     // not exposed to user's other apps unless rooted in which case it is your problem
