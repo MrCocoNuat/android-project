@@ -1,9 +1,10 @@
 # PC Presenter
 
-## Contributors 
- - Me (Aaron Wang)
- 
- That's it? Pod 11 people, you must all be dead or something
+## Contributor(s)
+ - Me
+ - Myself
+ - I
+Thanks, group 11 members. You were real helpful.
 
 ## Table of Contents
 1. [Overview](#Overview)
@@ -30,8 +31,8 @@ Backed by Parse.
 **Optional Nice-to-have Stories**
 
 - [ ] User can access a webpage to buy specific parts they see (from Amazon, etc.)
-- [ ] User can see all of a specific user's Rigs, including their own
-- [ ] User can attach benchmark scores to each Rig to indicate expected performance
+- [x] User can see all of a specific user's Rigs, including their own
+- [x] User can attach benchmark scores to each Rig to indicate expected performance
 - [ ] User can update this listing later if it changes or delete it
   
 ### 2. Screen Archetypes
@@ -82,8 +83,6 @@ Build 1
 ![](project_github_assets/wireframes/create.png)
 ![](project_github_assets/wireframes/profile.png)
 
-## Schema 
-[This section will be completed in Unit 9]
 ### Models
 Rig - Includes required fields (cpu, photo, etc.) and variable optional key-value fields (special notes, specific benchmark scores, etc.)
 
