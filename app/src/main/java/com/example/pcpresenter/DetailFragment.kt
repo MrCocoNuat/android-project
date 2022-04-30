@@ -13,6 +13,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import org.w3c.dom.Text
 
+//TODO shared elements
 
 class DetailFragment(val rig : Rig) : Fragment() {
 
